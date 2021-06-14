@@ -33,6 +33,11 @@ class KeyboardButton implements \JsonSerializable
      * @var bool
      */
     protected $requestLocation = false;
+    
+    /**
+     * @var bool
+     */
+    protected $pay = false;
 
     /**
      * @param $text
@@ -59,6 +64,16 @@ class KeyboardButton implements \JsonSerializable
     public function url($url)
     {
         $this->url = $url;
+
+        return $this;
+    }
+    
+    /**
+     * @return $this
+     */
+    public function isPayable()
+    {
+        $this->pay = true;
 
         return $this;
     }
@@ -111,6 +126,7 @@ class KeyboardButton implements \JsonSerializable
             'request_contact' => $this->requestContact,
             'request_location' => $this->requestLocation,
             'text' => $this->text,
+            'pay' => $this->pay
         ])->filter()->toArray();
     }
 }
